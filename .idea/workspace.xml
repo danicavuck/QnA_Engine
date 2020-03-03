@@ -14,7 +14,11 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1Y7Euj3fbPcM5s5ukOzLzRmlXP0" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -22,6 +26,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
@@ -106,6 +111,10 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
+    <state x="395" y="90" width="800" height="672" key="#Notifications" timestamp="1583222270902">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="395" y="90" width="800" height="672" key="#Notifications/0.0.1600.860/1600.0.1600.900@0.0.1600.860" timestamp="1583222270902" />
     <state x="533" y="179" width="524" height="495" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1583162237742">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
@@ -118,22 +127,22 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="583" y="187" width="424" height="479" key="FileChooserDialogImpl/0.0.1600.860/1600.0.1600.900@0.0.1600.860" timestamp="1582285567320" />
-    <state width="1579" height="162" key="GridCell.Tab.0.bottom" timestamp="1583221618348">
+    <state width="789" height="140" key="GridCell.Tab.0.bottom" timestamp="1583222234725">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1579" height="162" key="GridCell.Tab.0.bottom/0.0.1600.860/1600.0.1600.900@0.0.1600.860" timestamp="1583221618348" />
-    <state width="1579" height="162" key="GridCell.Tab.0.center" timestamp="1583221618348">
+    <state width="789" height="140" key="GridCell.Tab.0.bottom/0.0.1600.860/1600.0.1600.900@0.0.1600.860" timestamp="1583222234725" />
+    <state width="789" height="140" key="GridCell.Tab.0.center" timestamp="1583222234725">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1579" height="162" key="GridCell.Tab.0.center/0.0.1600.860/1600.0.1600.900@0.0.1600.860" timestamp="1583221618348" />
-    <state width="1579" height="162" key="GridCell.Tab.0.left" timestamp="1583221618348">
+    <state width="789" height="140" key="GridCell.Tab.0.center/0.0.1600.860/1600.0.1600.900@0.0.1600.860" timestamp="1583222234725" />
+    <state width="789" height="140" key="GridCell.Tab.0.left" timestamp="1583222234725">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1579" height="162" key="GridCell.Tab.0.left/0.0.1600.860/1600.0.1600.900@0.0.1600.860" timestamp="1583221618348" />
-    <state width="1579" height="162" key="GridCell.Tab.0.right" timestamp="1583221618348">
+    <state width="789" height="140" key="GridCell.Tab.0.left/0.0.1600.860/1600.0.1600.900@0.0.1600.860" timestamp="1583222234725" />
+    <state width="789" height="140" key="GridCell.Tab.0.right" timestamp="1583222234725">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1579" height="162" key="GridCell.Tab.0.right/0.0.1600.860/1600.0.1600.900@0.0.1600.860" timestamp="1583221618348" />
+    <state width="789" height="140" key="GridCell.Tab.0.right/0.0.1600.860/1600.0.1600.900@0.0.1600.860" timestamp="1583222234725" />
     <state width="1579" height="301" key="GridCell.Tab.1.bottom" timestamp="1583151859380">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
@@ -154,6 +163,10 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="304" y="64" key="SettingsEditor/0.0.1600.860/1600.0.1600.900@0.0.1600.860" timestamp="1582285596880" />
+    <state x="395" y="165" width="800" height="523" key="Vcs.Push.Dialog.v2" timestamp="1583222251751">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="395" y="165" width="800" height="523" key="Vcs.Push.Dialog.v2/0.0.1600.860/1600.0.1600.900@0.0.1600.860" timestamp="1583222251751" />
     <state width="800" height="430" key="XDebugger.FullValuePopup" timestamp="1582538834902">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
@@ -166,5 +179,9 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="565" y="67" width="460" height="718" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1600.860/1600.0.1600.900@0.0.1600.860" timestamp="1583161726585" />
+    <state x="510" y="222" width="569" height="408" key="git4idea.merge.GitPullDialog" timestamp="1583222289884">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="510" y="222" width="569" height="408" key="git4idea.merge.GitPullDialog/0.0.1600.860/1600.0.1600.900@0.0.1600.860" timestamp="1583222289884" />
   </component>
 </project>
