@@ -34,10 +34,35 @@ def corpus_preprocessing(corpus):
 
     return train_input
 
+def compute_result(y_pred,y_true):
+    df = pd.DataFrame(columns=['y_pred','y_true'])
+    for i,j in zip(y_pred,y_true):
+        df = df.append({'y_pred': i , 'y_true': j},ignore_index=True)
+
+
+    df.to_csv('result.csv',sep = "\t",index_label=None , header= True,index=False)
+    return df
+
+
+def compute_accuracy(result):
+    true_predictions = 0
+    false_predictions = 0
+    for index, row in result.iterrows():
+        if row['y_true'] == 1:
+            if row['y_pred'] > 0.5:
+                true_predictions += 1
+            else:
+                false_predictions += 1
+        else:
+            if row['y_pred'] < 0.5:
+                true_predictions += 1
+            else:
+                false_predictions += 1
+
+    return true_predictions,false_predictions,(true_predictions/200)*100
 
 def exponent_neg_manhattan_distance(left, right):
     return K.exp(-K.sum(K.abs(left-right), axis=1, keepdims=True))
-
 
 def make_vocabulary():
     vocabulary = dict()
@@ -104,8 +129,6 @@ def make_input_data(df):
 
 
                 if len(value_list_pos) != 0:
-                   # key_list_pos = np.asarray(key_list_pos)
-                   # value_list_pos = np.asarray(value_list_pos)
                     df = df.append({'question1':key_list_pos, 'question2':value_list_pos , 'similar':1},ignore_index=True)
                     num_pos += 1
             else:
@@ -130,8 +153,6 @@ def make_input_data(df):
 
 
                 if len(value_list_neg) != 0:
-                    #key_list_neg = np.asarray(key_list_neg)
-                    #value_list_neg = np.asarray(value_list_neg)
                     df = df.append({'question1': key_list_neg ,'question2': value_list_neg ,'similar': 0},ignore_index=True)
                     num_neg += 1
             else:
@@ -157,11 +178,7 @@ def make_input_data(df):
 
     return train_input
 
-def compute_accuracy(y_true, y_pred):
-    '''Compute classification accuracy with a fixed threshold on distances.
-    '''
-    pred = y_pred.ravel() < 0.5
-    return np.mean(pred == y_true)
+
 
 index_questions = joblib.load('serialized/questions_dict')
 index_questions_paraphrased = joblib.load('serialized/questions_paraphrased_dict')
@@ -187,6 +204,7 @@ X_train = {'question1': X_train.question1, 'question2': X_train.question2}
 
 # Convert labels to their numpy representations
 Y_train = Y_train.values
+
 
 
 Y_train = input_data['similar'].values
@@ -220,7 +238,6 @@ embedding_dim = 50# This will be the embedding matrix
 embeddings = 1 * np.random.randn(len(vocabulary) + 1, embedding_dim)
 embeddings[0] = 0  # So that the padding will be ignored
 
-print(embeddings.shape)
 
 # The visible layer
 left_input = Input(shape=(max_seq_length,), dtype='int32')
@@ -254,13 +271,12 @@ training_start_time = datetime.time()
 
 malstm_trained = malstm.fit([X_train['question1'], X_train['question2']], Y_train, epochs=epochs,verbose=1)
 
-
 y_pred = malstm.predict([X_train['question1'], X_train['question2']])
 
-tr_y = Y_train
+result = compute_result(y_pred,Y_train)
 
+true_pred,false_pred,accuracy = compute_accuracy(result)
 
-tr_acc = compute_accuracy(tr_y,y_pred)
-
-print('* Accuracy on training set: %0.2f%%' % (100 * tr_acc))
-
+print(true_pred)
+print(false_pred)
+print(accuracy)
