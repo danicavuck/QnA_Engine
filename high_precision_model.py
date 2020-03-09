@@ -1,14 +1,14 @@
 import numpy as np
 import joblib
-from nltk.corpus import stopwords
+
 from nltk.tokenize import word_tokenize
-from gensim.models import Word2Vec
+from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import wordnet
 import nltk
 from scipy import spatial
 import re
-import main
+#import main
 
 
 def nltk_tag_to_wordnet_tag(nltk_tag):
@@ -62,36 +62,10 @@ def avg_feature_vector(sentence, model, num_features, index2word_set):
         if word in index2word_set:
             n_words += 1
             feature_vec = np.add(feature_vec, model[word])
-    if (n_words > 0):
+    if n_words > 0:
         feature_vec = np.divide(feature_vec, n_words)
     return feature_vec
 
-
-def corpus_preprocessing(corpus):
-    corpus = [word for word in corpus if word not in stopwords.words('english')]
-    filtered_qs = []
-
-    for sent in corpus:
-        sent = re.sub('[?.,#!:;"''`]', '', sent)
-        sent = sent.lower()
-        filtered_qs.append(sent)
-
-    train_input = []
-    for q in filtered_qs:
-        q = q.strip()
-        word = q.split(" ")
-        train_input.append(word)
-
-
-    return train_input
-
-
-def train_word2vec(train_input):
-    model = Word2Vec(min_count=1)
-    model.build_vocab(train_input)
-    model.train(train_input, total_examples=model.corpus_count, epochs=model.iter)
-
-    return model
 
 
 def input_preprocessing(input_question):
@@ -111,16 +85,17 @@ def input_preprocessing(input_question):
     return final_input
 
 
-input = joblib.load('input_question')
+input = joblib.load('serialized/input_question')
 #input = "How Do I Get A Life Insurance License In Virginia?"
-corpus = joblib.load('question_corpus')
-top100 = joblib.load('top100_questions')
-answers = joblib.load('top100_answers')
+model = joblib.load('serialized/word2vec')
+top100 = joblib.load('serialized/top100_questions')
+answers = joblib.load('serialized/top100_answers')
+
+
 
 lemmatizer = WordNetLemmatizer()
 
-train_input = corpus_preprocessing(corpus)
-model = train_word2vec(train_input)
+
 
 final_input = input_preprocessing(input)
 print(answers)
@@ -150,9 +125,10 @@ for a in answers:
     num2 += 1
 
 
+
 for s in questions_dictionary.items():
     value = s[1].strip()
-    s1_afv = avg_feature_vector(final_input, model=model,num_features=100,index2word_set=index2word_set)
+    s1_afv = avg_feature_vector(final_input,model=model,num_features=100,index2word_set=index2word_set)
     s2_afv = avg_feature_vector(value, model=model,num_features=100,index2word_set=index2word_set)
     sim = 1 - spatial.distance.cosine(s1_afv, s2_afv)
     similarities[s[0]] = sim

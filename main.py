@@ -3,6 +3,8 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.neighbors import NearestNeighbors
 from nltk.corpus import wordnet
 import csv
+from nltk.corpus import stopwords
+from gensim.models import Word2Vec
 from nltk.stem import WordNetLemmatizer
 import joblib
 import re
@@ -53,8 +55,6 @@ def parse_csv_dataset():
             if line_count == 0:
                 line_count += 1
             else:
-                #sent = re.sub('[?.,#!:;"''`]', '', row[1])
-                #sent = sent.lower()
                 index_answers[line_count - 1] = row[2]
                 index_question[line_count - 1] = row[1]
                 line_count += 1
@@ -63,8 +63,53 @@ def parse_csv_dataset():
     return index_answers,index_question
 
 
-index_answers , index_question = parse_csv_dataset()
+def parse_paraphrased_dataset():
+    index_question_paraphrased = dict()
 
+    with open('paraphrazed_final_100.csv', mode='r') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter='\t')
+        line_count = 0
+        for row in csv_reader:
+            if line_count == 0:
+                indeks = int(row[0]) * 5
+                index_question_paraphrased[indeks] = row[1]
+                line_count += 1
+            else:
+                indeks = int(row[0]) * 5
+                index_question_paraphrased[indeks] = row[1]
+                line_count += 1
+
+    return index_question_paraphrased
+
+
+def corpus_preprocessing(corpus):
+    corpus = [word for word in corpus if word not in stopwords.words('english')]
+    filtered_qs = []
+
+    for sent in corpus:
+        sent = re.sub('[?.,#!:;"''`]', '', sent)
+        sent = sent.lower()
+        filtered_qs.append(sent)
+
+    train_input = []
+    for q in filtered_qs:
+        q = q.strip()
+        word = q.split(" ")
+        train_input.append(word)
+
+    return train_input
+
+
+def train_word2vec(train_input):
+    model = Word2Vec(min_count=1)
+    model.build_vocab(train_input)
+    model.train(train_input, total_examples=model.corpus_count, epochs=model.iter)
+    joblib.dump(model, 'serialized/word2vec')
+    return model
+
+
+index_questions_paraphrased =  parse_paraphrased_dataset()
+index_answers , index_question = parse_csv_dataset()
 lemmatizer = WordNetLemmatizer()
 #text_sentence_tokens = nltk.sent_tokenize(text)
 
@@ -77,16 +122,21 @@ for sent in index_question.values():
     sentences.append(sentence)
 
 
+train_input = corpus_preprocessing(sentences)
+
+model = train_word2vec(train_input)
+
+
 Tfidf_Vec = TfidfVectorizer(tokenizer=Tokenize, stop_words='english')
 tfidf = Tfidf_Vec.fit_transform(sentences)
 
 print("Ask your question:")
 input_question = input()
-joblib.dump(input_question,'input_question')
 question = re.sub('[?]', '', input_question)
 question_lemmatized = lemmatize_sentence(question.lower())
 question = nltk.sent_tokenize(question_lemmatized)
 question_tfidf = Tfidf_Vec.transform(question)
+
 
 
 nn = NearestNeighbors(n_neighbors= 100, algorithm='ball_tree').fit(tfidf)
@@ -104,6 +154,9 @@ for i in indices:
 
 
 print(questions)
-joblib.dump(questions,"top100_questions")
-joblib.dump(sentences,'question_corpus')
-joblib.dump(answers,"top100_answers")
+joblib.dump(index_questions_paraphrased,'serialized/questions_paraphrased_dict')
+joblib.dump(index_question,'serialized/questions_dict')
+joblib.dump(questions,"serialized/top100_questions")
+joblib.dump(sentences,'serialized/corpus')
+joblib.dump(answers,"serialized/top100_answers")
+joblib.dump(input_question,'serialized/input_question')
