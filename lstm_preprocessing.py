@@ -325,16 +325,25 @@ for q in top100_q:
 
 
 y_pred = []
+index = 0
+df = pd.DataFrame(columns=['question1', 'question2','index'])
 for vec in top100_vectors:
-    df = pd.DataFrame(columns=['question1', 'question2'])
-    df = df.append({'question1': return_value, 'question2': vec}, ignore_index=True)
+    df = df.append({'question1': return_value, 'question2': vec,'index':index}, ignore_index=True)
+    index += 1
 
 X_predict = {'question1':df.question1 , 'question2':df.question2}
+print(X_predict)
 
 for dataset, side in itertools.product([X_predict], ['question1', 'question2']):
     dataset[side] = pad_sequences(dataset[side], maxlen=max_seq_length)
 
 
-y_pred = malstm.predict([X_predict['question1'], X_predict['question2']])
+
+y_pred.append(malstm.predict([X_predict['question1'], X_predict['question2']]))
 
 print(y_pred)
+answers = joblib.load('serialized/top100_answers')
+
+index = y_pred.index(max(y_pred))
+
+print(answers[index])
