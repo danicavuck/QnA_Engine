@@ -2,10 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="381ed208-5385-4a01-8a62-780451de47ed" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/other.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/insurance_qna.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/insurance_qna.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lstm_preprocessing.py" beforeDir="false" afterPath="$PROJECT_DIR$/lstm_preprocessing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/high_precision_model.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/insurance_qna_dataset.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/insurance_qna_dataset.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lstm_preprocessing.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/paraphrazed_final_100.csv" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/paraphrazed_final_100.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/serialized/input_question" beforeDir="false" afterPath="$PROJECT_DIR$/serialized/input_question" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/serialized/top100_answers" beforeDir="false" afterPath="$PROJECT_DIR$/serialized/top100_answers" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/serialized/top100_questions" beforeDir="false" afterPath="$PROJECT_DIR$/serialized/top100_questions" afterDir="false" />
@@ -41,11 +43,14 @@
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Korisnik\PycharmProjects\QnA_Engine\dataset" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.lstm_preprocessing">
+  <component name="RunManager" selected="Python.high_precision_model">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="insurance_qna" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -136,9 +141,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.high_precision_model" />
         <item itemvalue="Python.lstm_preprocessing" />
         <item itemvalue="Python.main" />
-        <item itemvalue="Python.high_precision_model" />
       </list>
     </recent_temporary>
   </component>
@@ -164,7 +169,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1582285456869</updated>
-      <workItem from="1583849113736" duration="840000" />
+      <workItem from="1583849113736" duration="3955000" />
     </task>
     <servers />
   </component>
@@ -188,25 +193,25 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="583" y="187" width="424" height="479" key="FileChooserDialogImpl/0.0.1600.860/1600.0.1600.900@0.0.1600.860" timestamp="1582285567320" />
-    <state width="1493" height="127" key="GridCell.Tab.0.bottom" timestamp="1583849921163">
+    <state width="1493" height="270" key="GridCell.Tab.0.bottom" timestamp="1583853058559">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="127" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1583849921163" />
+    <state width="1493" height="270" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1583853058559" />
     <state width="1600" height="357" key="GridCell.Tab.0.bottom/0.0.1600.860/1600.0.1600.900@0.0.1600.860" timestamp="1583839793715" />
-    <state width="1493" height="127" key="GridCell.Tab.0.center" timestamp="1583849921163">
+    <state width="1493" height="270" key="GridCell.Tab.0.center" timestamp="1583853058559">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="127" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1583849921163" />
+    <state width="1493" height="270" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1583853058559" />
     <state width="1600" height="357" key="GridCell.Tab.0.center/0.0.1600.860/1600.0.1600.900@0.0.1600.860" timestamp="1583839793715" />
-    <state width="1493" height="127" key="GridCell.Tab.0.left" timestamp="1583849921163">
+    <state width="1493" height="270" key="GridCell.Tab.0.left" timestamp="1583853058559">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="127" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1583849921163" />
+    <state width="1493" height="270" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1583853058559" />
     <state width="1600" height="357" key="GridCell.Tab.0.left/0.0.1600.860/1600.0.1600.900@0.0.1600.860" timestamp="1583839793714" />
-    <state width="1493" height="127" key="GridCell.Tab.0.right" timestamp="1583849921163">
+    <state width="1493" height="270" key="GridCell.Tab.0.right" timestamp="1583853058559">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="127" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1583849921163" />
+    <state width="1493" height="270" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1583853058559" />
     <state width="1600" height="357" key="GridCell.Tab.0.right/0.0.1600.860/1600.0.1600.900@0.0.1600.860" timestamp="1583839793715" />
     <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1583849177136">
       <screen x="0" y="0" width="1536" height="824" />
@@ -263,7 +268,8 @@
     <state x="463" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1600.860/1600.0.1600.900@0.0.1600.860" timestamp="1583761743261" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/QnA_Engine$lstm_preprocessing.coverage" NAME="lstm_preprocessing Coverage Results" MODIFIED="1583849921147" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/QnA_Engine$main.coverage" NAME="main Coverage Results" MODIFIED="1583849865515" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/QnA_Engine$lstm_preprocessing.coverage" NAME="lstm_preprocessing Coverage Results" MODIFIED="1583851934186" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/QnA_Engine$high_precision_model.coverage" NAME="high_precision_model Coverage Results" MODIFIED="1583853058539" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/QnA_Engine$main.coverage" NAME="main Coverage Results" MODIFIED="1583850988720" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

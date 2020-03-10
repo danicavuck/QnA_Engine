@@ -48,7 +48,7 @@ def parse_csv_dataset():
     index_answers = dict()
     index_question = dict()
 
-    with open('insurance_qna_dataset.csv', mode='r') as csv_file:
+    with open('dataset/insurance_qna_dataset.csv', mode='r') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter='\t')
         line_count = 0
         for row in csv_reader:
@@ -66,7 +66,7 @@ def parse_csv_dataset():
 def parse_paraphrased_dataset():
     index_question_paraphrased = dict()
 
-    with open('paraphrazed_final_100.csv', mode='r') as csv_file:
+    with open('dataset/paraphrazed_final_100.csv', mode='r') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter='\t')
         line_count = 0
         for row in csv_reader:
