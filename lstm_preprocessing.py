@@ -10,7 +10,6 @@ import random
 import re
 from keras import backend as K, Model
 import pandas as pd
-#from main import corpus_preprocessing
 
 
 from keras.layers import Input, Flatten, Dense, Dropout, Lambda, LSTM, Embedding
@@ -180,6 +179,42 @@ def make_input_data(df):
 
 
 
+def input_preprocessing(input):
+
+    q = re.sub('[?.,#!:;"''`]', '', input)
+    q = q.strip()
+    q = q.lower()
+    tokenized = nltk.word_tokenize(q,language='english')
+
+    ret_value = []
+    for word in tokenized:
+
+        if word in vocabulary:
+            ret_value.append(vocabulary[word])
+        else:
+            print("Word not in vocabulary!")
+
+    return ret_value
+
+
+def zero_padding(top100_vectors):
+    transformed_vec = []
+    for vec in top100_vectors:
+        if len(vec) < max_seq_length:
+            var = []
+            difference = max_seq_length - len(vec)
+            for i in range(difference):
+                var.append(0)
+
+            temp = var + vec
+            transformed_vec.append(temp)
+        else:
+            return transformed_vec
+
+    return transformed_vec
+
+
+
 index_questions = joblib.load('serialized/questions_dict')
 index_questions_paraphrased = joblib.load('serialized/questions_paraphrased_dict')
 
@@ -190,27 +225,19 @@ df = pd.DataFrame(columns=['question1','question2','similar'])
 input_data = make_input_data(df)
 
 
-validation_size = 100
-training_size = len(input_data) - validation_size
-
 questions_cols = ['question1','question2']
 
 X_train = input_data[questions_cols]
 Y_train = input_data['similar']
 
 
-# Split to dicts
-X_train = {'question1': X_train.question1, 'question2': X_train.question2}
-
 # Convert labels to their numpy representations
 Y_train = Y_train.values
 
 
-
+#split to dicts
 Y_train = input_data['similar'].values
 X_train = {'question1':input_data.question1,'question2':input_data.question2}
-
-
 
 
 
@@ -226,12 +253,32 @@ max_seq_length = max(input_data.question1.map(lambda x: len(x)).max(),
                      input_data.question2.map(lambda x: len(x)).max())
 
 
-print(max_seq_length)
+
+input_question = joblib.load('serialized/input_question')
+top100_q = joblib.load('serialized/top100_questions')
+top100_a = joblib.load('serialized/top100_answers')
+
+
+return_value = input_preprocessing(input_question)
+
+
+if len(return_value) < max_seq_length:
+    temp = max_seq_length - len(return_value)
+    var = []
+    for i in range(temp):
+        var.append(0)
+    ret_value = var + return_value
+
+
+
+#ret_value = np.asarray(ret_value)
+#transformed_vec = np.asarray(transformed_vec)
 
 
 # Zero padding
 for dataset, side in itertools.product([X_train], ['question1', 'question2']):
     dataset[side] = pad_sequences(dataset[side],  maxlen=max_seq_length)
+
 
 
 embedding_dim = 50# This will be the embedding matrix
@@ -269,14 +316,25 @@ malstm.compile(loss='mean_squared_error', optimizer=optimizer, metrics=['accurac
 # Start training
 training_start_time = datetime.time()
 
+
 malstm_trained = malstm.fit([X_train['question1'], X_train['question2']], Y_train, epochs=epochs,verbose=1)
 
-y_pred = malstm.predict([X_train['question1'], X_train['question2']])
+top100_vectors = []
+for q in top100_q:
+    top100_vectors.append(input_preprocessing(q))
 
-result = compute_result(y_pred,Y_train)
 
-true_pred,false_pred,accuracy = compute_accuracy(result)
+y_pred = []
+for vec in top100_vectors:
+    df = pd.DataFrame(columns=['question1', 'question2'])
+    df = df.append({'question1': return_value, 'question2': vec}, ignore_index=True)
 
-print(true_pred)
-print(false_pred)
-print(accuracy)
+X_predict = {'question1':df.question1 , 'question2':df.question2}
+
+for dataset, side in itertools.product([X_predict], ['question1', 'question2']):
+    dataset[side] = pad_sequences(dataset[side], maxlen=max_seq_length)
+
+
+y_pred = malstm.predict([X_predict['question1'], X_predict['question2']])
+
+print(y_pred)
